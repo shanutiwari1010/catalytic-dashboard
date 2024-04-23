@@ -9,7 +9,7 @@ import {
 
 import "@/styles/globals.css";
 
-import Layout from "@/layout";
+import Layout from "@/layout/index";
 import Profile from "@/pages/profile";
 import Intheft from "@/pages/intheft";
 import Devices from "@/pages/devices";
