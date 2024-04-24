@@ -5,10 +5,8 @@ const Bargraph = ({ data, legend, categories, text }) => {
     legend: {
       // show: legend ? legend : true,
       show: legend,
-      fontSize: "10px",
-      fontWeight: "bold",
-
-      marginTop: "10px",
+      fontSize: "14px",
+      fontWeight: 500,
       formatter: function (value) {
         return value.split(" ")[0] + " d";
       },
@@ -17,7 +15,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
         vertical: 10,
       },
       labels: {
-        colors: "white",
+        colors: "black",
         // useSeriesColors: false
       },
     },
@@ -96,10 +94,9 @@ const Bargraph = ({ data, legend, categories, text }) => {
     yaxis: {
       title: {
         text: "Reports",
-        offsetX: 3,
         style: {
           color: "black",
-          fontSize: "10px",
+          fontSize: "14px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
         },
@@ -108,18 +105,18 @@ const Bargraph = ({ data, legend, categories, text }) => {
       labels: {
         show: true,
         style: {
-          colors: "black",
-          fontSize: "8px",
+          colors: "",
+          fontSize: "12px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
         },
       },
     },
     grid: {
-      show: false,
+      show: true,
       xaxis: {
         lines: {
-          show: false,
+          show: true,
         },
       },
       yaxis: {
@@ -137,13 +134,13 @@ const Bargraph = ({ data, legend, categories, text }) => {
   };
 
   return (
-    <div className="size-52  my-8">
+    <div>
       <Chart
         options={options}
         series={data}
         type="bar"
-        height={265}
-        width={200}
+        height={300}
+        width={300}
       />
     </div>
   );
