@@ -20,6 +20,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Sidebar from "@/components/Sidebar";
 
 const FormSchema = z.object({
   device_model: z.string().min(1, { message: "Device Model is required" }),
@@ -67,141 +68,146 @@ const DeviceForm = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center ">
-      <div className="rounded-md bg-white px-12 py-4">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleDeviceForm)}
-            className=" mx-auto space-y-4 w-96 "
-          >
-            <FormField
-              control={form.control}
-              name="device_model"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Device Model</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter device model" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] bg-gray-200">
+      <div className="hidden border-r bg-muted/40 md:block">
+        <Sidebar />
+      </div>
+      <div className="h-screen flex justify-center items-center ">
+        <div className="rounded-md bg-white px-12 py-4">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleDeviceForm)}
+              className=" mx-auto space-y-4 w-96 "
+            >
+              <FormField
+                control={form.control}
+                name="device_model"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Device Model</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter device model" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <FormField
-              control={form.control}
-              name="serial_number"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Serial Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Serial Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+              <FormField
+                control={form.control}
+                name="serial_number"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Serial Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Serial Number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <FormField
-              control={form.control}
-              name="imei_number"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>IMEI Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter IMEI Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+              <FormField
+                control={form.control}
+                name="imei_number"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>IMEI Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter IMEI Number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <FormField
-              control={form.control}
-              name="iccid_number"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>ICCID Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter ICCID Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+              <FormField
+                control={form.control}
+                name="iccid_number"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>ICCID Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter ICCID Number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <FormField
-              control={form.control}
-              name="firmware"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Firmware</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Firmware " {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+              <FormField
+                control={form.control}
+                name="firmware"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Firmware</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Firmware " {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <FormField
-              control={form.control}
-              name="sales_channel"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sales Channel</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Description " {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+              <FormField
+                control={form.control}
+                name="sales_channel"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sales Channel</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Description " {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <FormField
-              control={form.control}
-              name="manufacturer_id"
-              render={({ field }) => (
-                <FormItem {...field}>
-                  <FormLabel>Manufacturer ID</FormLabel>
-                  <FormControl>
-                    <Select>
-                      <SelectTrigger className="text-gray-500">
-                        <SelectValue placeholder="Select an Option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="one">1</SelectItem>
-                        <SelectItem value="two">2</SelectItem>
-                        <SelectItem value="three">3</SelectItem>
-                        <SelectItem value="four">4</SelectItem>
-                        <SelectItem value="five">5</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+              <FormField
+                control={form.control}
+                name="manufacturer_id"
+                render={({ field }) => (
+                  <FormItem {...field}>
+                    <FormLabel>Manufacturer ID</FormLabel>
+                    <FormControl>
+                      <Select>
+                        <SelectTrigger className="text-gray-500">
+                          <SelectValue placeholder="Select an Option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="one">1</SelectItem>
+                          <SelectItem value="two">2</SelectItem>
+                          <SelectItem value="three">3</SelectItem>
+                          <SelectItem value="four">4</SelectItem>
+                          <SelectItem value="five">5</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Description " {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Description " {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
 
-            <Button className="w-full" type="submit">
-              Submit
-            </Button>
-          </form>
-        </Form>
+              <Button className="w-full" type="submit">
+                Submit
+              </Button>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
   );

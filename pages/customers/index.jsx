@@ -20,6 +20,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Sidebar from "@/components/Sidebar";
 
 const FormSchema = z.object({
   customer_name: z.string().min(1, { message: "Customer name is required" }),
@@ -43,7 +44,7 @@ const FormSchema = z.object({
   country_id: z.string(),
 });
 
-const MyForm = () => {
+const CustomerForm = () => {
   const form = useForm({
     defaultValues: {
       customer_name: "",
@@ -62,140 +63,145 @@ const MyForm = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div className="rounded-md bg-white px-12 py-4 ">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleCustomerForm)}
-            className="w-96 mx-auto space-y-4"
-          >
-            <FormField
-              control={form.control}
-              name="customer_name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Customer Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="customer_email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Customer Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your email address"
-                      type="email"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] bg-gray-200 ">
+      <div className="hidden border-r bg-muted/40 md:block">
+        <Sidebar />
+      </div>
+      <div className=" flex justify-center items-center">
+        <div className="rounded-md bg-white px-12 py-4 ">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleCustomerForm)}
+              className="w-96 mx-auto space-y-4"
+            >
+              <FormField
+                control={form.control}
+                name="customer_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Customer Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="customer_email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Customer Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your email address"
+                        type="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="organization_name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Organization Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="organization_email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Organization Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your email address"
-                      type="email"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="contact"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Contact Number</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your contact number"
-                      type="tel"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="organization_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Organization Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="organization_email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Organization Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your email address"
+                        type="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="contact"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Contact Number</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your contact number"
+                        type="tel"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="customer_access_number"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Customer Access Number</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your Customer Access Number"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="country_id"
-              render={({ field }) => (
-                <FormItem {...field}>
-                  <FormLabel>Country ID</FormLabel>
-                  <FormControl>
-                    <Select>
-                      <SelectTrigger className="text-gray-500">
-                        <SelectValue placeholder="Select an Option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1">1</SelectItem>
-                        <SelectItem value="2">2</SelectItem>
-                        <SelectItem value="3">3</SelectItem>
-                        <SelectItem value="4">4</SelectItem>
-                        <SelectItem value="5">5</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            ></FormField>
-            <Button className="w-full" type="submit">
-              Submit
-            </Button>
-          </form>
-        </Form>
+              <FormField
+                control={form.control}
+                name="customer_access_number"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Customer Access Number</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your Customer Access Number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="country_id"
+                render={({ field }) => (
+                  <FormItem {...field}>
+                    <FormLabel>Country ID</FormLabel>
+                    <FormControl>
+                      <Select>
+                        <SelectTrigger className="text-gray-500">
+                          <SelectValue placeholder="Select an Option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                          <SelectItem value="5">5</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
+              <Button className="w-full" type="submit">
+                Submit
+              </Button>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
   );
 };
 
-export default MyForm;
+export default CustomerForm;
