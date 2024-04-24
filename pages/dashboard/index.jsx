@@ -10,6 +10,8 @@ import {
   Search,
   ShoppingCart,
   Users,
+  TriangleAlert,
+  Car,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -31,8 +33,73 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Bargraph from "@/components/Charts/Bargraph";
+import LineGraph from "@/components/Charts/Linegraph";
+import Areagraph from "@/components/Charts/Areagraph";
+import Explorer from "@/components/Charts/Explorer";
+import MapView from "@/components/Charts/MapView";
+import { useState, useEffect } from "react";
+
+const STATS = [
+  {
+    title: "In-Theft",
+    icon: <Car />,
+    key: "in_theft",
+    value: "12",
+    increment: "3",
+  },
+  {
+    title: "Devices",
+    icon: <Package />,
+    key: "devices",
+    value: "345",
+    increment: "20",
+  },
+  {
+    title: "Vehicles",
+    icon: <Car />,
+    key: "vehicles",
+    value: "1234",
+    increment: "50",
+  },
+  {
+    title: "Customers",
+    icon: <Car />,
+    key: "customers",
+    value: "5673",
+    increment: "201",
+  },
+];
 
 export default function Dashboard() {
+  const [reportingData, setReportingData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getReportingData = async () => {
+      try {
+        const dataReq = await fetch("http://localhost:3000/data");
+        if (!dataReq.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const dataRes = await dataReq.json();
+        setReportingData(dataRes);
+      } catch (error) {
+        setError(error.message);
+        console.error("Error fetching data:", error);
+      }
+    };
+    getReportingData();
+  }, []);
+
+  console.log(reportingData, "data");
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!reportingData || reportingData.length === 0) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -40,7 +107,7 @@ export default function Dashboard() {
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <Package2 className="h-6 w-6" />
-              <span className="">Acme Inc</span>
+              <span className="">Logo name</span>
             </Link>
             <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
               <Bell className="h-4 w-4" />
@@ -60,18 +127,25 @@ export default function Dashboard() {
                 to="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
-                <ShoppingCart className="h-4 w-4" />
-                Orders
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                <TriangleAlert className="h-4 w-4" />
+                inTheft
+                {/* <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                   6
-                </Badge>
+                </Badge> */}
               </Link>
               <Link
                 to="#"
                 className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
               >
                 <Package className="h-4 w-4" />
-                Products{" "}
+                Devices{" "}
+              </Link>
+              <Link
+                to="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <Car className="h-4 w-4" />
+                Vehicles
               </Link>
               <Link
                 to="#"
@@ -80,30 +154,7 @@ export default function Dashboard() {
                 <Users className="h-4 w-4" />
                 Customers
               </Link>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <LineChart className="h-4 w-4" />
-                Analytics
-              </Link>
             </nav>
-          </div>
-          <div className="mt-auto p-4">
-            <Card x-chunk="dashboard-02-chunk-0">
-              <CardHeader className="p-2 pt-0 md:p-4">
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Button size="sm" className="w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
@@ -168,22 +219,6 @@ export default function Dashboard() {
                   Analytics
                 </Link>
               </nav>
-              <div className="mt-auto">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Upgrade to Pro</CardTitle>
-                    <CardDescription>
-                      Unlock all features and get unlimited access to our
-                      support team.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button size="sm" className="w-full">
-                      Upgrade
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1">
@@ -201,7 +236,7 @@ export default function Dashboard() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                {/* <CircleUser className="h-5 w-5" /> */}
+                <CircleUser className="h-5 w-5" />
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
@@ -216,22 +251,83 @@ export default function Dashboard() {
           </DropdownMenu>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
+          <div className="flex items-center justify-center md:justify-between gap-4 flex-wrap">
+            {STATS.map((item, index) => (
+              <Card className="w-64 bg-primary text-white" key={index}>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>{item.title}</CardTitle>
+                    <span>{item.icon}</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <h2 className="text-4xl font-bold">{item.value}</h2>
+                  <span className="font-medium text-sm text-white">{`+${item.increment} from last month`}</span>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-          <div
-            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-            x-chunk="dashboard-02-chunk-1"
-          >
-            <div className="flex flex-col items-center gap-1 text-center">
-              <h3 className="text-2xl font-bold tracking-tight">
-                You have no products
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                You can start selling as soon as you add a product.
-              </p>
-              <Button className="mt-4">Add Product</Button>
-            </div>
+          <div className="grid grid-cols-3 flex-wrap p-4 gap-4 items-center justify-center rounded-lg border border-dashed shadow-sm">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Reporting</CardTitle>
+                  <Package />
+                </div>
+              </CardHeader>
+              <CardContent> 
+                <Bargraph
+                  data={reportingData.reports}
+                  legend={true}
+                  categories={["1 day", "7 days", "30 days"]}
+                  text={reportingData.reports[3].text}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Device Count</CardTitle>
+                  <Car />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Bargraph
+                  data={reportingData.deviceCount}
+                  legend={true}
+                  categories={["cus1", "cus2", "cus3"]}
+                  text={reportingData.deviceCount[2].text}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Vehicle Count</CardTitle>
+                  <Car />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Bargraph
+                  data={reportingData.vehicleCount}
+                  legend={true}
+                  categories={["cus1", "cus2", "cus3"]}
+                  text={reportingData.vehicleCount[2].text}
+                />
+              </CardContent>
+            </Card>
+
+            <Bargraph
+              data={reportingData.vehicleCount}
+              legend={true}
+              categories={["cus1", "cus2", "cus3"]}
+              text={reportingData.vehicleCount[2].text}
+            />
+            <Areagraph
+              data={reportingData.deviceInfo}
+              legend={true}
+              text={"new/installed/active/total devices"}
+            />
           </div>
         </main>
       </div>
