@@ -8,7 +8,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
       fontSize: "14px",
       fontWeight: 500,
       formatter: function (value) {
-        return value.split(" ")[0] + " d";
+        return value.split(" ")[0];
       },
       itemMargin: {
         horizontal: 8,
@@ -54,7 +54,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
         offsetY: 5,
         offsetX: -12,
         style: {
-          color: "white",
+          // color: "black",
           fontSize: "10px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
@@ -67,7 +67,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
           return value.split(" ")[0] + " d";
         },
         style: {
-          colors: "blackw",
+          colors: "black",
           fontSize: "8px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
@@ -79,7 +79,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
         color: "black",
         height: 1,
         width: "100%",
-        offsetX: 8,
+        offsetX: 0,
         offsetY: 0,
       },
       axisTicks: {
@@ -87,13 +87,14 @@ const Bargraph = ({ data, legend, categories, text }) => {
         borderType: "solid",
         color: "#06090a",
         height: 4,
-        offsetX: 8,
+        offsetX: 0,
         offsetY: 0,
       },
     },
     yaxis: {
       title: {
         text: "Reports",
+        offsetX: -5,
         style: {
           color: "black",
           fontSize: "14px",
@@ -105,7 +106,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
       labels: {
         show: true,
         style: {
-          colors: "",
+          colors: "black",
           fontSize: "12px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
@@ -128,7 +129,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
         top: 0,
         right: 0,
         bottom: 0,
-        left: 0,
+        left: 6,
       },
     },
   };
@@ -139,7 +140,7 @@ const Bargraph = ({ data, legend, categories, text }) => {
         options={options}
         series={data}
         type="bar"
-        height={300}
+        height={250}
         width={300}
       />
     </div>

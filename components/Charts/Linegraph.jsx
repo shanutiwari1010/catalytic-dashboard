@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 
 const LineGraph = ({ data, text, type }) => {
   const options = {
+    
     chart: {
       type: "line",
       height: 250,
@@ -39,7 +40,7 @@ const LineGraph = ({ data, text, type }) => {
         offsetY: 5,
         offsetX: -12,
         style: {
-          color: "white",
+          color: "black",
           fontSize: "10px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
@@ -51,21 +52,39 @@ const LineGraph = ({ data, text, type }) => {
         //   return value.split(" ")[0] + " d";
         // },
         style: {
-          colors: "white",
+          colors: "black",
           fontSize: "8px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
         },
-        offsetY: -3,
+        offsetY: -5,
       },
+
+      axisBorder: {
+        show: true,
+        color: "black",
+        height: 1,
+        width: "100%",
+        offsetX: 0,
+        offsetY: 0,
+      },
+      axisTicks: {
+        show: true,
+        borderType: "solid",
+        color: "#06090a",
+        height: 4,
+        offsetX: 0,
+        offsetY: 0,
+      },
+      
     },
     yaxis: {
       title: {
         text: "theft",
-        offsetX: 3,
+        offsetX: -5,
         style: {
-          color: "white",
-          fontSize: "10px",
+          color: "black",
+          fontSize: "14px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
         },
@@ -74,18 +93,18 @@ const LineGraph = ({ data, text, type }) => {
       labels: {
         show: true,
         style: {
-          colors: "white",
-          fontSize: "8px",
+          colors: "black",
+          fontSize: "12px",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 600,
         },
       },
     },
     grid: {
-      show: false,
+      show: true,
       xaxis: {
         lines: {
-          show: false,
+          show: true,
         },
       },
       yaxis: {
@@ -97,7 +116,7 @@ const LineGraph = ({ data, text, type }) => {
         top: 0,
         right: 0,
         bottom: 0,
-        left: 0,
+        left: 6,
       },
     },
   };
@@ -112,13 +131,13 @@ const LineGraph = ({ data, text, type }) => {
   console.log(series, "series", series.name);
 
   return (
-    <div className="size-52 ring-4 ring-purple-500 rounded-xl my-8">
+    <div>
       <Chart
         options={options}
         series={series}
         type="line"
-        height={230}
-        width={200}
+        height={250}
+        width={300}
       />
     </div>
   );
