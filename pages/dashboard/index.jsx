@@ -12,6 +12,11 @@ import {
   Users,
   TriangleAlert,
   Car,
+  Info,
+  ClipboardPlus,
+  Battery,
+  BatteryCharging,
+  Power
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -101,7 +106,7 @@ export default function Dashboard() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] bg-gray-200">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
@@ -272,10 +277,10 @@ export default function Dashboard() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-xl">Reporting</CardTitle>
-                  <Package />
+                  <ClipboardPlus />
                 </div>
               </CardHeader>
-              <CardContent> 
+              <CardContent>
                 <Bargraph
                   data={reportingData.reports}
                   legend={true}
@@ -288,7 +293,7 @@ export default function Dashboard() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-xl">Device Count</CardTitle>
-                  <Car />
+                  <Package />
                 </div>
               </CardHeader>
               <CardContent>
@@ -300,6 +305,7 @@ export default function Dashboard() {
                 />
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -317,17 +323,68 @@ export default function Dashboard() {
               </CardContent>
             </Card>
 
-            <Bargraph
-              data={reportingData.vehicleCount}
-              legend={true}
-              categories={["cus1", "cus2", "cus3"]}
-              text={reportingData.vehicleCount[2].text}
-            />
-            <Areagraph
-              data={reportingData.deviceInfo}
-              legend={true}
-              text={"new/installed/active/total devices"}
-            />
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Device Information</CardTitle>
+                  <Info />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Areagraph
+                  data={reportingData.deviceInfo}
+                  legend={true}
+                  text={"new/installed/active/total devices"}
+                />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Theft Information</CardTitle>
+                  <TriangleAlert />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <LineGraph
+                  data={reportingData.theft}
+                  type="Theft"
+                  text={"intheft/date"}
+                />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Device Battery</CardTitle>
+                  <BatteryCharging />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <LineGraph
+                  data={reportingData.deviceBattery}
+                  type="deviceBattery"
+                  text={"device bettry"}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl">Vehicle Battery</CardTitle>
+                  <Power />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <LineGraph
+                  data={reportingData.vehicleBattery}
+                  type="vehicleBattery"
+                  text={"vehicle bettry"}
+                />
+              </CardContent>
+            </Card>
           </div>
         </main>
       </div>
