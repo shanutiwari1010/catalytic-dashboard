@@ -7,6 +7,9 @@ import {
   Package,
   Car,
   Users,
+  Settings,
+  CircleHelp,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -24,42 +27,70 @@ function Sidebar() {
         </Button>
       </div>
       <div className="flex-1">
-        <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-          <Link
-            to="/"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Home className="h-4 w-4" />
-            Dashboard
-          </Link>
-          <Link
-            to="/intheft"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <TriangleAlert className="h-4 w-4" />
-            inTheft
-          </Link>
-          <Link
-            to="/devices"
-            className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-          >
-            <Package className="h-4 w-4" />
-            Devices
-          </Link>
-          <Link
-            to="/vehicles"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Car className="h-4 w-4" />
-            Vehicles
-          </Link>
-          <Link
-            to="/customers"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-          >
-            <Users className="h-4 w-4" />
-            Customers
-          </Link>
+        <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-96">
+          <div>
+            <Link
+              to="/"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <Home className="h-4 w-4" />
+              Dashboard
+            </Link>
+            <Link
+              to="/intheft"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <TriangleAlert className="h-4 w-4" />
+              inTheft
+            </Link>
+            <Link
+              to="/devices"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <Package className="h-4 w-4" />
+              Devices
+            </Link>
+            <Link
+              to="/vehicles"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <Car className="h-4 w-4" />
+              Vehicles
+            </Link>
+            <Link
+              to="/customers"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <Users className="h-4 w-4" />
+              Customers
+            </Link>
+          </div>
+
+          <div>
+            <Link
+              to="/settings"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <Settings className="h-4 w-4" />
+              Settings
+            </Link>
+
+            <Link
+              to="/helpcenter"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <CircleHelp className="h-4 w-4" />
+              Help center
+            </Link>
+
+            <Link
+              to="/logout"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </Link>
+          </div>
         </nav>
       </div>
     </div>
